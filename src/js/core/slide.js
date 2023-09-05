@@ -28,6 +28,8 @@ export default class Slide {
      * @param {function} callback
      */
     setContent(slide = null, callback = false) {
+        console.log("slide set content");
+
         if (hasClass(slide, 'loaded')) {
             return false;
         }
@@ -52,11 +54,14 @@ export default class Slide {
         let slideDesc = slide.querySelector('.gdesc-inner');
         let finalCallback = callback;
 
+        console.log("callback is" + callback);
+
         // used for image accessiblity
         let titleID = 'gSlideTitle_' + this.index;
         let textID = 'gSlideDesc_' + this.index;
 
         if (isFunction(settings.afterSlideLoad)) {
+            console.log("BAWWW10");
             finalCallback = () => {
                 if (isFunction(callback)) {
                     callback();
@@ -68,6 +73,8 @@ export default class Slide {
                 });
             };
         }
+
+                    console.log("BAWWW20");
 
         if (slideConfig.title == '' && slideConfig.description == '') {
             if (slideDesc) {
@@ -95,6 +102,7 @@ export default class Slide {
             addClass(slideMedia.parentNode, `desc-${position}`);
             addClass(slideDesc.parentNode, `description-${position}`);
         }
+            console.log("BAWWW30");
 
         addClass(slideMedia, `gslide-${type}`);
         addClass(slide, 'loaded');
@@ -122,8 +130,10 @@ export default class Slide {
             }
             return;
         }
+            console.log("BAWWW40");
 
         if (type === 'image') {
+            console.log("BAWWW50");
             slideImage(slide, slideConfig, this.index, () => {
                 const img = slide.querySelector('img');
 
@@ -142,17 +152,24 @@ export default class Slide {
                         this.instance.resize();
                     });
                 }
+            console.log("BAWWW50");
 
                 if (isFunction(finalCallback)) {
+                    console.log("trying to call final callback");
                     finalCallback();
                 }
             });
             return;
         }
+            console.log("BAWWW60");
 
         if (isFunction(finalCallback)) {
+            console.log("trying to call final callback");
             finalCallback();
         }
+
+                    console.log("BAWWW80");
+
     }
 
     slideShortDesc(string, n = 50, wordBoundary = false) {

@@ -10,6 +10,8 @@
 import { createIframe } from '../utils/helpers.js';
 
 export default function slideIframe(slide, data, index, callback) {
+    console.log("slideiframeX");
+
     const slideMedia = slide.querySelector('.gslide-media');
     const iframe = createIframe({
         url: data.href,

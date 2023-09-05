@@ -6,6 +6,7 @@ export default class SlideConfigParser {
             href: '',
             sizes: '',
             srcset: '',
+            sources: '',
             title: '',
             type: '',
             videoProvider: '',
@@ -34,6 +35,8 @@ export default class SlideConfigParser {
     sourceType(url) {
         let origin = url;
         url = url.toLowerCase();
+
+        console.log(`source type: ${url}`);
 
         if (url.match(/\.(jpeg|jpg|jpe|gif|png|apn|webp|avif|svg)/) !== null) {
             return 'image';
@@ -68,6 +71,7 @@ export default class SlideConfigParser {
 
     parseConfig(element, settings) {
         let data = extend({ descPosition: settings.descPosition }, this.defaults);
+        console.log(`AWW10`);
 
         if (isObject(element) && !isNode(element)) {
             if (!has(element, 'type')) {
@@ -82,7 +86,7 @@ export default class SlideConfigParser {
 
             return objectData;
         }
-
+        console.log(`AWW20`);
         let url = '';
         let config = element.getAttribute('data-glightbox');
         let nodeType = element.nodeName.toLowerCase();
@@ -98,15 +102,27 @@ export default class SlideConfigParser {
 
         data.href = url;
 
+        console.log(`AWW21`);
+
         each(data, (val, key) => {
             if (has(settings, key) && key !== 'width') {
                 data[key] = settings[key];
             }
+
+            console.log(`AWW22: ${key}`);
+
+
+
             const nodeData = element.dataset[key];
             if (!isNil(nodeData)) {
                 data[key] = this.sanitizeValue(nodeData);
+            } else if (key === 'sources') {
+                console.log(`AWW23: ${element.dataset.sourcesJson}`);
+                console.log(`AWW23`);
+                data[key] = JSON.parse(element.dataset.sourcesJson);
             }
         });
+        console.log(`AWW35`);
 
         if (data.content) {
             data.type = 'inline';
@@ -117,6 +133,7 @@ export default class SlideConfigParser {
         }
 
         if (!isNil(config)) {
+            console.log(`AWW40`);
             let cleanKeys = [];
             each(data, (v, k) => {
                 cleanKeys.push(';\\s?' + k);
@@ -136,6 +153,7 @@ export default class SlideConfigParser {
                 });
             }
         } else {
+            console.log(`AWW50`);
             if (!data.title && nodeType == 'a') {
                 let title = element.title;
                 if (!isNil(title) && title !== '') {
@@ -149,6 +167,7 @@ export default class SlideConfigParser {
                 }
             }
         }
+        console.log(`AWW60`);
 
         // Try to get the description from a referenced element
         if (data.description && data.description.substring(0, 1) === '.') {
@@ -166,6 +185,7 @@ export default class SlideConfigParser {
                 data.description = description;
             }
         }
+        console.log(`AWW70`);
 
         // Try to get the description from a .glightbox-desc element
         if (!data.description) {
@@ -175,8 +195,14 @@ export default class SlideConfigParser {
             }
         }
 
+        if (data.sourcesJSON) {
+            let sources = JSON.parse(data.sourcesJSON);
+            data.sources = sources;
+        }
+
         this.setSize(data, settings, element);
         this.slideConfig = data;
+        console.log(`AWW80`);
 
         return data;
     }

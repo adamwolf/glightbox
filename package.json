@@ -4,7 +4,8 @@
   "description": "Pure Javascript lightbox",
   "main": "dist/js/glightbox.min.js",
   "scripts": {
-    "watch": "node development/watcher.js"
+    "watch": "node development/watcher.js",
+    "build": "node development/build.js"
   },
   "author": "Biati Digital",
   "keywords": [

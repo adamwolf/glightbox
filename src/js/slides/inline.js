@@ -13,6 +13,7 @@
 import { has, addClass, addEvent, createHTML, isString, isNode, isFunction } from '../utils/helpers.js';
 
 export default function slideInline(slide, data, index, callback) {
+    console.log("slideinlineX");
     const slideMedia = slide.querySelector('.gslide-media');
     const hash = has(data, 'href') && data.href ? data.href.split('#').pop().trim() : false;
     const content = has(data, 'content') && data.content ? data.content : false;

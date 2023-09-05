@@ -9,6 +9,7 @@
 import { has, closest, injectAssets, addClass, removeClass, createHTML, isFunction, waitUntil } from '../utils/helpers.js';
 
 export default function slideVideo(slide, data, index, callback) {
+    console.log("slidevideoX");
     const slideContainer = slide.querySelector('.ginner-container');
     const videoID = 'gvideo' + index;
     const slideMedia = slide.querySelector('.gslide-media');
