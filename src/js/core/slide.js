@@ -1,6 +1,6 @@
 /**
  * Slide
- * class to hablde slide creation
+ * class to handle slide creation
  * and config parser
  */
 

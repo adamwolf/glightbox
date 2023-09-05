@@ -6,6 +6,7 @@ export default class SlideConfigParser {
             href: '',
             sizes: '',
             srcset: '',
+            sources: '',
             title: '',
             type: '',
             videoProvider: '',
@@ -82,7 +83,6 @@ export default class SlideConfigParser {
 
             return objectData;
         }
-
         let url = '';
         let config = element.getAttribute('data-glightbox');
         let nodeType = element.nodeName.toLowerCase();
@@ -105,6 +105,8 @@ export default class SlideConfigParser {
             const nodeData = element.dataset[key];
             if (!isNil(nodeData)) {
                 data[key] = this.sanitizeValue(nodeData);
+            } else if (key === 'sources') {
+                data[key] = JSON.parse(element.dataset.sourcesJson); // TODO do we need to sanitize this?
             }
         });
 
@@ -173,6 +175,11 @@ export default class SlideConfigParser {
             if (nodeDesc) {
                 data.description = nodeDesc.innerHTML;
             }
+        }
+
+        if (data.sourcesJSON) {
+            let sources = JSON.parse(data.sourcesJSON);
+            data.sources = sources;
         }
 
         this.setSize(data, settings, element);

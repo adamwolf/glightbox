@@ -1,5 +1,7 @@
 # GLightbox
 
+// TODO add a real build command!!!!
+
 GLightbox is a pure javascript lightbox. It can display images, iframes, inline content and videos with optional autoplay for YouTube, Vimeo and even self hosted videos.
 
 ## Features
