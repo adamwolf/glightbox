@@ -45,7 +45,18 @@ async function handleJavascript(file) {
     const minName = name.replace('.js', '.min.js');
     const processed = path.join(config.js.dest, name);
     const code = fs.readFileSync(processed, 'utf8');
-    const minified = terser.minify(code);
+    let minified;
+    try {
+        minified = terser.minify(code);
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+
+    if (minified && minified.error) {
+        console.log(minified.error);
+        return false;
+    }
     const minifyPath = path.join(config.js.dest, minName);
     fs.writeFileSync(minifyPath, minified.code);
 
