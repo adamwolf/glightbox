@@ -47,7 +47,7 @@ async function handleJavascript(file) {
     const code = fs.readFileSync(processed, 'utf8');
     let minified;
     try {
-        minified = terser.minify(code);
+        minified = await terser.minify(code);
     } catch (error) {
         console.log(error);
         return false;
