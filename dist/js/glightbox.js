@@ -1,9 +1,23 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.GLightbox = factory());
-}(this, (function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.GLightbox = factory());
+})(this, (function () { 'use strict';
 
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -34,20 +48,6 @@
       writable: false
     });
     return Constructor;
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var uid = Date.now();
@@ -418,11 +418,11 @@
     };
     document.body.appendChild(script);
   }
-  function isMobile() {
+  function isMobile$1() {
     return 'navigator' in window && window.navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i);
   }
-  function isTouch() {
-    return isMobile() !== null || document.createTouch !== undefined || 'ontouchstart' in window || 'onmsgesturechange' in window || navigator.msMaxTouchPoints;
+  function isTouch$1() {
+    return isMobile$1() !== null || document.createTouch !== undefined || 'ontouchstart' in window || 'onmsgesturechange' in window || navigator.msMaxTouchPoints;
   }
   function isFunction(f) {
     return typeof f === 'function';
@@ -582,7 +582,7 @@
       this.handlers = [];
       this.el = el;
     }
-    _createClass(EventsHandlerAdmin, [{
+    return _createClass(EventsHandlerAdmin, [{
       key: "add",
       value: function add(handler) {
         this.handlers.push(handler);
@@ -610,7 +610,6 @@
         }
       }
     }]);
-    return EventsHandlerAdmin;
   }();
   function wrapFunc(el, handler) {
     var EventshandlerAdmin = new EventsHandlerAdmin(el);
@@ -668,7 +667,7 @@
         y: null
       };
     }
-    _createClass(TouchEvents, [{
+    return _createClass(TouchEvents, [{
       key: "start",
       value: function start(evt) {
         if (!evt.touches) {
@@ -897,7 +896,6 @@
         return null;
       }
     }]);
-    return TouchEvents;
   }();
 
   function resetSlideMove(slide) {
@@ -1182,7 +1180,7 @@
       }, false);
       this.img.setZoomEvents = true;
     }
-    _createClass(ZoomImages, [{
+    return _createClass(ZoomImages, [{
       key: "zoomIn",
       value: function zoomIn() {
         var winWidth = this.widowWidth();
@@ -1291,7 +1289,6 @@
         return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       }
     }]);
-    return ZoomImages;
   }();
 
   var DragSlides = function () {
@@ -1335,7 +1332,7 @@
         return _this.drag(e);
       }, false);
     }
-    _createClass(DragSlides, [{
+    return _createClass(DragSlides, [{
       key: "dragStart",
       value: function dragStart(e) {
         if (this.slide.classList.contains('zoomed')) {
@@ -1489,7 +1486,6 @@
         node.style.transform = "translate3d(".concat(xPos, "px, ").concat(yPos, "px, 0)");
       }
     }]);
-    return DragSlides;
   }();
 
   function slideImage(slide, data, index, callback) {
@@ -1706,7 +1702,7 @@
         this.defaults = extend(this.defaults, slideParamas);
       }
     }
-    _createClass(SlideConfigParser, [{
+    return _createClass(SlideConfigParser, [{
       key: "sourceType",
       value: function sourceType(url) {
         var origin = url;
@@ -1871,7 +1867,6 @@
         return val === 'true';
       }
     }]);
-    return SlideConfigParser;
   }();
 
   var Slide = function () {
@@ -1881,7 +1876,7 @@
       this.instance = instance;
       this.index = index;
     }
-    _createClass(Slide, [{
+    return _createClass(Slide, [{
       key: "setContent",
       value: function setContent() {
         var _this = this;
@@ -1892,7 +1887,7 @@
         }
         var settings = this.instance.settings;
         var slideConfig = this.slideConfig;
-        var isMobileDevice = isMobile();
+        var isMobileDevice = isMobile$1();
         if (isFunction(settings.beforeSlideLoad)) {
           settings.beforeSlideLoad({
             index: this.index,
@@ -2071,12 +2066,11 @@
         return this.slideConfig;
       }
     }]);
-    return Slide;
   }();
 
   var _version = '3.2.0';
-  var isMobile$1 = isMobile();
-  var isTouch$1 = isTouch();
+  var isMobile = isMobile$1();
+  var isTouch = isTouch$1();
   var html = document.getElementsByTagName('html')[0];
   var defaults = {
     selector: '.glightbox',
@@ -2182,7 +2176,7 @@
       this.apiEvents = [];
       this.fullElementsList = false;
     }
-    _createClass(GlightboxInit, [{
+    return _createClass(GlightboxInit, [{
       key: "init",
       value: function init() {
         var _this = this;
@@ -2240,7 +2234,7 @@
         }
         addClass(body, 'glightbox-open');
         addClass(html, 'glightbox-open');
-        if (isMobile$1) {
+        if (isMobile) {
           addClass(document.body, 'glightbox-mobile');
           this.settings.slideEffect = 'slide';
         }
@@ -2257,7 +2251,7 @@
         if (isFunction(this.settings.onOpen)) {
           this.settings.onOpen();
         }
-        if (isTouch$1 && this.settings.touchNavigation) {
+        if (isTouch && this.settings.touchNavigation) {
           touchNavigation(this);
         }
         if (this.settings.keyboardNavigation) {
@@ -2650,7 +2644,7 @@
       key: "slidePlayerPlay",
       value: function slidePlayerPlay(slide) {
         var _this$settings$plyr$c;
-        if (isMobile$1 && !((_this$settings$plyr$c = this.settings.plyr.config) !== null && _this$settings$plyr$c !== void 0 && _this$settings$plyr$c.muted)) {
+        if (isMobile && !((_this$settings$plyr$c = this.settings.plyr.config) !== null && _this$settings$plyr$c !== void 0 && _this$settings$plyr$c.muted)) {
           return;
         }
         if (isNode(slide)) {
@@ -2869,7 +2863,7 @@
           _this7.slidesContainer.appendChild(slide.instance.create());
           slide.slideNode = _this7.slidesContainer.querySelectorAll('.gslide')[i];
         });
-        if (isTouch$1) {
+        if (isTouch) {
           addClass(document.body, 'glightbox-touch');
         }
         this.events['resize'] = addEvent('resize', {
@@ -2908,7 +2902,7 @@
         }
         if (image) {
           if (winWidth <= 768) {
-            var imgNode = image.querySelector('img');
+            image.querySelector('img');
           } else if (descriptionResize) {
             var descHeight = description.offsetHeight;
             var _imgNode = image.querySelector('img');
@@ -3112,7 +3106,6 @@
         return _version;
       }
     }]);
-    return GlightboxInit;
   }();
   function glightbox () {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -3123,4 +3116,4 @@
 
   return glightbox;
 
-})));
+}));
