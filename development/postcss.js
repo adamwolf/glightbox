@@ -1,9 +1,9 @@
 const postcss = require('postcss');
-const cssnext = require('postcss-preset-env');
 const cssnested = require('postcss-nested');
-const cssmqpacker = require('css-mqpacker');
 const cssprettify = require('postcss-prettify');
 const cssclean = require('clean-css');
+const postcssPresetEnv = require('postcss-preset-env');
+const postcssCustomMedia = require('postcss-custom-media');
 const path = require('path');
 const fs = require('fs');
 
@@ -18,16 +18,14 @@ function postcssCompiler(config) {
 
     return new Promise((resolve, reject) => {
         return postcss([
-            cssnested(),
-            cssnext({
-                stage: 0,
-                browsers: ['last 2 version'],
+            postcssCustomMedia(),
+            require('postcss-sort-media-queries')(),
+            postcssPresetEnv({
+                stage: 3,
+                browsers: 'last 2 versions',
                 features: {
-                    calc: false
+                    'nesting-rules': true
                 }
-            }),
-            cssmqpacker({
-                sort: true
             }),
             cssprettify()
         ])
