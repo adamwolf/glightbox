@@ -1,6 +1,6 @@
 const { rollup } = require('rollup');
-const babel = require('rollup-plugin-babel');
-const resolve = require('rollup-plugin-node-resolve');
+const babel = require('@rollup/plugin-babel');
+const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const path = require('path');
 
@@ -50,11 +50,7 @@ function jscompiler(config) {
                 babel({
                     comments: false,
                     exclude: 'node_modules/**',
-                    presets: [
-                        ['@babel/preset-env', {
-                            modules: false
-                        }]
-                    ]
+                    babelHelpers: 'bundled',
                 }),
             ]
         }).then((bundle) => {
