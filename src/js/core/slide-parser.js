@@ -6,6 +6,7 @@ export default class SlideConfigParser {
             href: '',
             sizes: '',
             srcset: '',
+            sources: '',
             title: '',
             type: '',
             videoProvider: '',
@@ -108,6 +109,14 @@ export default class SlideConfigParser {
             }
         });
 
+        try {
+            if (element.dataset.sourcesJson) {
+                data.sources = JSON.parse(element.dataset.sourcesJson);
+            }
+        } catch (error) {
+            console.error('Invalid sourcesJson data attribute:', error);
+        }
+
         if (data.content) {
             data.type = 'inline';
         }
@@ -172,6 +181,14 @@ export default class SlideConfigParser {
             let nodeDesc = element.querySelector('.glightbox-desc');
             if (nodeDesc) {
                 data.description = nodeDesc.innerHTML;
+            }
+        }
+
+        if (data.sourcesJSON && typeof data.sourcesJSON === 'string') {
+            try {
+                data.sources = JSON.parse(data.sourcesJSON);
+            } catch (error) {
+                console.error('Invalid sourcesJSON value:', error);
             }
         }
 
