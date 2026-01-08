@@ -1,9 +1,9 @@
-const jscompiler = require('./jscompiler');
+const jscompiler = require('./jscompiler.cjs');
 const path = require("path");
-const notify = require("./notifications");
+const notify = require("./notifications.cjs");
 const fs = require("fs");
 const terser = require("terser");
-const postcssCompiler = require("./postcss");
+const postcssCompiler = require("./postcss.cjs");
 
 let config = {
     js: {

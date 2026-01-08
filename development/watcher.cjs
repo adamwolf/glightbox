@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
-const notify = require('./notifications');
-const builder = require('./builder');
+const notify = require('./notifications.cjs');
+const builder = require('./builder.cjs');
 
 
 /**

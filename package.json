@@ -5,8 +5,8 @@
   "type": "module",
   "main": "dist/js/glightbox.min.js",
   "scripts": {
-    "watch": "node development/watcher.js",
-    "build": "node development/build.js",
+    "watch": "node development/watcher.cjs",
+    "build": "node development/build.cjs",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "author": "Biati Digital",
